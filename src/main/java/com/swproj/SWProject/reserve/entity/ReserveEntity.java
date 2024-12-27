@@ -1,5 +1,6 @@
 package com.swproj.SWProject.reserve.entity;
 
+import com.swproj.SWProject.config.entity.Users;
 import com.swproj.SWProject.projenums.Periodically;
 import com.swproj.SWProject.projenums.Status;
 import com.swproj.SWProject.roommangement.entity.RoomEntity;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -35,5 +37,8 @@ public class ReserveEntity {
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
     private RoomEntity roomEntity;
+
+    private Long userId;
+
 
 }

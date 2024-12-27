@@ -12,7 +12,6 @@ public class AdminPanelController {
 
     private final AdminPanelService adminPanelService;
 
-    // Existing endpoint
     @GetMapping("/getListOfUsers")
     public Page<Users> getUsers(
             @RequestParam(required = false) String keyword,
@@ -22,11 +21,10 @@ public class AdminPanelController {
         return adminPanelService.getUsers(keyword, page, size);
     }
 
-    // New endpoint to update user role
     @PostMapping("/setUserRole")
     public String setUserRole(
             @RequestParam Long userId,
-            @RequestParam Long collegeId,
+            @RequestParam(required = false) Long collegeId ,
             @RequestParam String role
     ) {
         return adminPanelService.setUserRole(userId, collegeId, role);

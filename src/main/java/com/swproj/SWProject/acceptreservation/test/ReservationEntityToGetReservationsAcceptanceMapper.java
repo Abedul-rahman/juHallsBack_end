@@ -11,6 +11,7 @@ public class ReservationEntityToGetReservationsAcceptanceMapper implements Funct
     public GetReservationsAcceptResDTO apply(ReserveEntity reserveEntity) {
 
         return GetReservationsAcceptResDTO.builder()
+                .userId(reserveEntity.getUserId())
                 .reservationId(reserveEntity.getId())
                 .startDate(reserveEntity.getStartDate())
                 .endDate(reserveEntity.getEndDate())

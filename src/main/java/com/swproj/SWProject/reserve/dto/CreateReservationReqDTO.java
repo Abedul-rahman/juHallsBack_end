@@ -14,4 +14,5 @@ public class CreateReservationReqDTO {
     private LocalTime endTime;
     private Periodically periodically;
     private Long roomId;
+    private String username;
 }

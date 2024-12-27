@@ -8,6 +8,6 @@ import java.util.List;
 public interface ReserveService {
     void reserve(CreateReservationReqDTO createReservationReqDTO);
 
-    List<GetReservationsResDTO> getReservations();
+    List<GetReservationsResDTO> getReservations(Long roomId);
 
 }

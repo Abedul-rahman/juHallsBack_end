@@ -19,4 +19,5 @@ public class GetReservationsAcceptResDTO {
     private Periodically periodically;
     private Status status;
     private Long roomId;
+    private Long userId;
 }

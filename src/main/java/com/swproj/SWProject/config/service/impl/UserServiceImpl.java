@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -23,11 +25,12 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
     @Override
-    public Users registerUser(Users user) {
+    public void registerUser(Users user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole("STUDENT");
+        if (!Objects.isNull(user.getCollegeId()))
+            user.setCollegeId(new ArrayList<>(user.getCollegeId()));
         userRepo.save(user);
-        return user;
     }
 
     @Override

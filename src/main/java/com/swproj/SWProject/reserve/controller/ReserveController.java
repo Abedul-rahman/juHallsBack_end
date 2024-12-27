@@ -20,7 +20,7 @@ public class ReserveController {
         reserveService.reserve(createReservationReqDTO);
     }
     @GetMapping("/getReservations")
-    public List<GetReservationsResDTO> getReservations(){
-        return reserveService.getReservations();
+    public List<GetReservationsResDTO> getReservations(@RequestParam Long roomId ){
+        return reserveService.getReservations(roomId);
     }
 }

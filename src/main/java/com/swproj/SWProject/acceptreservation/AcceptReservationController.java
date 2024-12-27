@@ -23,4 +23,9 @@ public class AcceptReservationController {
     public void acceptReservation(@RequestParam Long reservationId) {
         acceptReservationService.acceptReservation(reservationId);
     }
+
+    @PostMapping("/DeclineReservation")
+    public void declineReservation(@RequestParam Long reservationId) {
+        acceptReservationService.declineReservation(reservationId);
+    }
 }

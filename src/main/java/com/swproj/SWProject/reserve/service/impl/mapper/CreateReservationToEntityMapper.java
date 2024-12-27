@@ -1,5 +1,7 @@
 package com.swproj.SWProject.reserve.service.impl.mapper;
 
+import com.swproj.SWProject.config.entity.Users;
+import com.swproj.SWProject.config.repo.UserRepo;
 import com.swproj.SWProject.projenums.Status;
 import com.swproj.SWProject.reserve.dto.CreateReservationReqDTO;
 import com.swproj.SWProject.reserve.entity.ReserveEntity;
@@ -16,9 +18,11 @@ import java.util.function.Function;
 public class CreateReservationToEntityMapper implements Function<CreateReservationReqDTO, ReserveEntity> {
     private final RoomRepo roomRepo;
     private final ReserveRepo reserveRepo;
+    private final UserRepo userRepo;
 
     @Override
     public ReserveEntity apply(CreateReservationReqDTO createReservationReqDTO) {
+        Users user = userRepo.findByUsername(createReservationReqDTO.getUsername());
         RoomEntity roomEntity = roomRepo.findById(createReservationReqDTO.getRoomId())
                 .orElseThrow(() -> new IllegalArgumentException("Room not found"));
 
@@ -44,6 +48,7 @@ public class CreateReservationToEntityMapper implements Function<CreateReservati
                 .status(Status.Pending)
                 .startTime(createReservationReqDTO.getStartTime())
                 .roomEntity(roomEntity)
+                .userId(user.getId())
                 .build();
     }
 }

@@ -2,6 +2,7 @@ package com.swproj.SWProject.reserve.service.impl;
 
 import com.swproj.SWProject.reserve.dto.CreateReservationReqDTO;
 import com.swproj.SWProject.reserve.dto.GetReservationsResDTO;
+import com.swproj.SWProject.reserve.entity.ReserveEntity;
 import com.swproj.SWProject.reserve.repo.ReserveRepo;
 import com.swproj.SWProject.reserve.service.ReserveService;
 import com.swproj.SWProject.reserve.service.impl.mapper.CreateReservationToEntityMapper;
@@ -23,9 +24,10 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public List<GetReservationsResDTO> getReservations() {
-        return reserveRepo.findAll().stream()
-                .map(reservationEntityToGetReservationsMapper).toList();
+    public List<GetReservationsResDTO> getReservations(Long roomId) {
+        List<ReserveEntity> reservations = reserveRepo.findByRoomEntityId(roomId);
+
+        return reservations.stream().map(reservationEntityToGetReservationsMapper).toList();
     }
 
 }

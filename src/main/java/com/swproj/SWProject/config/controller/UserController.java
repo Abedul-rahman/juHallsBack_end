@@ -14,8 +14,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/createUser")
-    public Users createUser(@RequestBody Users user) {
-        return userService.registerUser(user);
+    public void createUser(@RequestBody Users user) {
+         userService.registerUser(user);
     }
     @GetMapping("/getUsers")
     public List<Users> getAllUsers() {
@@ -23,6 +23,10 @@ public class UserController {
     }
     @PostMapping("/login")
     public String login(@RequestBody LogInReqDTO logInReqDTO) {
+        return userService.verify(logInReqDTO);
+    }
+    @PostMapping("/test")
+    public String test(@RequestBody LogInReqDTO logInReqDTO) {
         return userService.verify(logInReqDTO);
     }
 }

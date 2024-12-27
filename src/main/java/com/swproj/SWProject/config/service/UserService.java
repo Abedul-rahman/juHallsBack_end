@@ -6,7 +6,7 @@ import com.swproj.SWProject.config.entity.Users;
 import java.util.List;
 
 public interface UserService {
-    Users registerUser(Users users);
+    void registerUser(Users users);
     List<Users> getAllUsers();
 
     String verify(LogInReqDTO logInReqDTO);
