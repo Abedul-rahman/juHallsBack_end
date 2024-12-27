@@ -1,7 +1,7 @@
 package com.swproj.SWProject.reserve.entity;
 
-import com.swproj.SWProject.Peroidcally;
-import com.swproj.SWProject.Status;
+import com.swproj.SWProject.projenums.Periodically;
+import com.swproj.SWProject.projenums.Status;
 import com.swproj.SWProject.roommangement.entity.RoomEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class ReserveEntity {
     private LocalTime startTime;
     private LocalTime endTime;
     @Enumerated(EnumType.STRING)
-    private Peroidcally peroidcally;
+    private Periodically periodically;
 
     @Enumerated(EnumType.STRING)
     private Status status;

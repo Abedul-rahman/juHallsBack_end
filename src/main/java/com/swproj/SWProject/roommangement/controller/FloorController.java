@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/RoomManagement/floor")
+@RequestMapping("/RoomManagement")
 public class FloorController {
     private final FloorService floorService;
 

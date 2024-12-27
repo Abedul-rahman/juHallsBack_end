@@ -1,17 +1,17 @@
-package com.swproj.SWProject.reserve.service.impl.mapper;
+package com.swproj.SWProject.acceptreservation.test;
 
-import com.swproj.SWProject.reserve.dto.GetReservationsResDTO;
 import com.swproj.SWProject.reserve.entity.ReserveEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
 @Service
-public class ReservationEntityToGetReservationsMapper implements Function<ReserveEntity, GetReservationsResDTO> {
+public class ReservationEntityToGetReservationsAcceptanceMapper implements Function<ReserveEntity, GetReservationsAcceptResDTO> {
     @Override
-    public GetReservationsResDTO apply(ReserveEntity reserveEntity) {
+    public GetReservationsAcceptResDTO apply(ReserveEntity reserveEntity) {
 
-        return GetReservationsResDTO.builder()
+        return GetReservationsAcceptResDTO.builder()
+                .reservationId(reserveEntity.getId())
                 .startDate(reserveEntity.getStartDate())
                 .endDate(reserveEntity.getEndDate())
                 .roomId(reserveEntity.getRoomEntity().getId())

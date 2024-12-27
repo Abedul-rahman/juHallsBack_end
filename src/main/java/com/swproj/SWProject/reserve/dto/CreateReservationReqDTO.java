@@ -1,7 +1,6 @@
 package com.swproj.SWProject.reserve.dto;
 
-import com.swproj.SWProject.Peroidcally;
-import com.swproj.SWProject.Status;
+import com.swproj.SWProject.projenums.Periodically;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,6 +12,6 @@ public class CreateReservationReqDTO {
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Peroidcally peroidcally;
+    private Periodically periodically;
     private Long roomId;
 }

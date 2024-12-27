@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoomRepo extends JpaRepository<RoomEntity,Long> {
     List<RoomEntity> findByFloorId(Long floorId);
+
 }

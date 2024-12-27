@@ -1,4 +1,4 @@
-package com.swproj.SWProject.reserve.dto;
+package com.swproj.SWProject.acceptreservation.test;
 
 import com.swproj.SWProject.projenums.Periodically;
 import com.swproj.SWProject.projenums.Status;
@@ -10,7 +10,8 @@ import java.time.LocalTime;
 
 @Data
 @Builder
-public class GetReservationsResDTO {
+public class GetReservationsAcceptResDTO {
+    private Long reservationId;
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalTime startTime;
