@@ -10,29 +10,13 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@Data
 public class CollegeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFloors(List<FloorEntity> floors) {
-        this.floors = floors;
-    }
-
-    public void setAdmins(List<Users> admins) {
-        this.admins = admins;
-    }
 
     private String name;
 
@@ -43,19 +27,4 @@ public class CollegeEntity {
     @OneToMany
     private List<Users> admins;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<FloorEntity> getFloors() {
-        return floors;
-    }
-
-    public List<Users> getAdmins() {
-        return admins;
-    }
 }

@@ -11,5 +11,4 @@ import java.util.List;
 public class GetCollegeResDTO {
     private Long id;
     private String collegeName;
-    private List<GetFloorResDTO> floors;
 }

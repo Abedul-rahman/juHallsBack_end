@@ -8,4 +8,5 @@ public class EditRoomReqDTO {
     private String roomName;
     private int numberOfSeats;
     private int floorNumber;
+
 }

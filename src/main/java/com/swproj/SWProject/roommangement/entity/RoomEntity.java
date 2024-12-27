@@ -1,6 +1,6 @@
 package com.swproj.SWProject.roommangement.entity;
 
-import com.swproj.SWProject.roommangement.ROOM_TYPE;
+import com.swproj.SWProject.roommangement.enums.ROOM_TYPE;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

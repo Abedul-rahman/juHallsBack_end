@@ -1,6 +1,6 @@
 package com.swproj.SWProject.roommangement.service.impl.mapper.room;
 
-import com.swproj.SWProject.roommangement.dto.req.room.GetRoomResDTO;
+import com.swproj.SWProject.roommangement.dto.res.room.GetRoomResDTO;
 import com.swproj.SWProject.roommangement.entity.RoomEntity;
 import org.springframework.stereotype.Service;
 

@@ -2,6 +2,7 @@ package com.swproj.SWProject.roommangement.controller;
 
 import com.swproj.SWProject.roommangement.dto.req.college.CreateCollegeReqDTO;
 import com.swproj.SWProject.roommangement.dto.req.college.EditCollegeReqDTO;
+import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeResDTO;
 import com.swproj.SWProject.roommangement.service.CollegeService;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class CollegeController {
         return ResponseEntity.ok().body(collegeService.getColleges());
     }
     @GetMapping("/getCollegeById")
-    public ResponseEntity<GetCollegeResDTO> getCollegeById(@RequestParam long id){
+    public ResponseEntity<GetCollegeByIdResDTO> getCollegeById(@RequestParam long id){
         return ResponseEntity.ok().body(collegeService.getCollegeById(id));
     }
 }

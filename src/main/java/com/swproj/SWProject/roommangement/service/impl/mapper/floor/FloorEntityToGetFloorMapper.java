@@ -1,35 +1,36 @@
 package com.swproj.SWProject.roommangement.service.impl.mapper.floor;
 
-import com.swproj.SWProject.roommangement.dto.req.room.GetRoomResDTO;
+import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorResDTO;
+import com.swproj.SWProject.roommangement.dto.res.room.GetRoomResDTO;
 import com.swproj.SWProject.roommangement.entity.FloorEntity;
+import com.swproj.SWProject.roommangement.entity.RoomEntity;
+import com.swproj.SWProject.roommangement.repo.FloorRepo;
+import com.swproj.SWProject.roommangement.repo.RoomRepo;
 import com.swproj.SWProject.roommangement.service.impl.mapper.room.RoomEntityToGetAllResMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FloorEntityToGetFloorMapper implements Function<FloorEntity, GetFloorResDTO> {
+public class FloorEntityToGetFloorMapper implements Function<FloorEntity, GetFloorByIdResDTO> {
+    private final RoomRepo roomRepo;
     private final RoomEntityToGetAllResMapper roomEntityToGetAllResMapper;
-
     @Override
-    public GetFloorResDTO apply(FloorEntity floorEntity) {
-        System.out.println(floorEntity.toString());
-        List<GetRoomResDTO> roomResDTOS = (floorEntity.getRooms() != null) ?
-                floorEntity.getRooms().stream()
+    public GetFloorByIdResDTO apply(FloorEntity floorEntity) {
+        List<GetRoomResDTO> roomResDTOs = roomRepo.findByFloorId(floorEntity.getId()).stream()
                 .map(roomEntityToGetAllResMapper)
-                .toList()
-                : List.of();
+                .toList();
 
-        return GetFloorResDTO.builder()
+        return GetFloorByIdResDTO.builder()
                 .floorId(floorEntity.getId())
                 .floorName(floorEntity.getFloorName())
                 .floorNumber(floorEntity.getFloorNumber())
-                .roomResDTOS(roomResDTOS)
+                .getRoomResDTO(roomResDTOs)
                 .build();
     }
+
 }

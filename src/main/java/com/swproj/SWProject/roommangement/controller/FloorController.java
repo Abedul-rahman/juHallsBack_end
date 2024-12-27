@@ -2,6 +2,7 @@ package com.swproj.SWProject.roommangement.controller;
 
 import com.swproj.SWProject.roommangement.dto.req.floor.CreateFloorReqDTO;
 import com.swproj.SWProject.roommangement.dto.req.floor.EditFloorReqDTO;
+import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorResDTO;
 import com.swproj.SWProject.roommangement.service.FloorService;
 import lombok.RequiredArgsConstructor;
@@ -16,28 +17,28 @@ import java.util.List;
 public class FloorController {
     private final FloorService floorService;
 
-    @PostMapping("/create")
+    @PostMapping("/createFloor")
     public void createFloor(@RequestBody CreateFloorReqDTO createFloorReqDTO) {
         floorService.createFloor(createFloorReqDTO);
     }
 
-    @DeleteMapping("/remove")
+    @DeleteMapping("/removeFloor")
     public void removeFloor(@RequestParam long id) {
         floorService.removeFloor(id);
     }
 
-    @PutMapping("/edit")
+    @PutMapping("/editFloor")
     public void editFloor(@RequestBody EditFloorReqDTO editFloorReqDTO) {
         floorService.editFloor(editFloorReqDTO);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllFloor")
     public ResponseEntity<List<GetFloorResDTO>> getFloors() {
         return ResponseEntity.ok(floorService.getFloors());
     }
 
-    @GetMapping("/getById")
-    public ResponseEntity<GetFloorResDTO> getFloorById(@RequestParam long id) {
+    @GetMapping("/getFloorById")
+    public ResponseEntity<GetFloorByIdResDTO> getFloorById(@RequestParam long id) {
         return ResponseEntity.ok(floorService.getFloorById(id));
     }
 }

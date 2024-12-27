@@ -2,7 +2,7 @@ package com.swproj.SWProject.roommangement.service.impl;
 
 import com.swproj.SWProject.roommangement.dto.req.room.CreateRoomReqDTO;
 import com.swproj.SWProject.roommangement.dto.req.room.EditRoomReqDTO;
-import com.swproj.SWProject.roommangement.dto.req.room.GetRoomResDTO;
+import com.swproj.SWProject.roommangement.dto.res.room.GetRoomResDTO;
 import com.swproj.SWProject.roommangement.entity.RoomEntity;
 import com.swproj.SWProject.roommangement.repo.RoomRepo;
 import com.swproj.SWProject.roommangement.service.RoomService;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

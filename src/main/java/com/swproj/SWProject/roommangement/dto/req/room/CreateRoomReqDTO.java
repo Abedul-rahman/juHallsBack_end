@@ -1,6 +1,6 @@
 package com.swproj.SWProject.roommangement.dto.req.room;
 
-import com.swproj.SWProject.roommangement.ROOM_TYPE;
+import com.swproj.SWProject.roommangement.enums.ROOM_TYPE;
 import lombok.Data;
 
 @Data

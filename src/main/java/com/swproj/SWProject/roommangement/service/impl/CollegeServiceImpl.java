@@ -4,6 +4,7 @@ import com.swproj.SWProject.config.entity.Users;
 import com.swproj.SWProject.config.repo.UserRepo;
 import com.swproj.SWProject.roommangement.dto.req.college.CreateCollegeReqDTO;
 import com.swproj.SWProject.roommangement.dto.req.college.EditCollegeReqDTO;
+import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeResDTO;
 import com.swproj.SWProject.roommangement.entity.CollegeEntity;
 import com.swproj.SWProject.roommangement.entity.FloorEntity;
@@ -11,6 +12,7 @@ import com.swproj.SWProject.roommangement.repo.CollegeRepo;
 import com.swproj.SWProject.roommangement.repo.FloorRepo;
 import com.swproj.SWProject.roommangement.service.CollegeService;
 import com.swproj.SWProject.roommangement.service.impl.mapper.college.CollegeEntityToGetAllResMapper;
+import com.swproj.SWProject.roommangement.service.impl.mapper.college.CollegeEntityToGetByIdResMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class CollegeServiceImpl implements CollegeService {
     private final CollegeRepo collegeRepo;
     private final CollegeEntityToGetAllResMapper collegeEntityToGetAllResMapper;
+    private final CollegeEntityToGetByIdResMapper collegeEntityToGetByIdResMapper;
     private final UserRepo userRepo;
     private final FloorRepo floorRepo;
 
@@ -64,8 +67,8 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public GetCollegeResDTO getCollegeById(long id) {
-        return collegeEntityToGetAllResMapper.apply(collegeRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("College not found with ID: " + id)));
+    public GetCollegeByIdResDTO getCollegeById(long id) {
+        return collegeEntityToGetByIdResMapper.apply(collegeRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("College not found with ID: " + id)));
     }
 
     @Override
@@ -73,6 +76,6 @@ public class CollegeServiceImpl implements CollegeService {
         return collegeRepo.findAll()
                 .stream()
                 .map(collegeEntityToGetAllResMapper)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
