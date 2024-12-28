@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 
 public interface ReserveRepo extends JpaRepository<ReserveEntity, Long> {
@@ -53,5 +54,11 @@ public interface ReserveRepo extends JpaRepository<ReserveEntity, Long> {
                            @Param("periodically") Periodically periodically);
     List<ReserveEntity> findByRoomEntityId(Long roomId);
 
+    List<ReserveEntity> getReserveEntityByUserId(Long userId);
 
+    @Query(value = "SELECT * FROM reserve_entity WHERE user_id = :userId ORDER BY id DESC LIMIT 4", nativeQuery = true)
+    List<ReserveEntity> findLast4ByUserId(@Param("userId") Long userId);
+
+    @Query(value = "SELECT * FROM reserve_entity ORDER BY id DESC LIMIT 4", nativeQuery = true)
+    List<ReserveEntity> findLast4();
 }

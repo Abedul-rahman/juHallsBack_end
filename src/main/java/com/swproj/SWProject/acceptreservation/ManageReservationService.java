@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AcceptReservationService {
+public class ManageReservationService {
     private final ReserveRepo reserveRepo;
     private final ReservationEntityToGetReservationsAcceptanceMapper mapper;
 
