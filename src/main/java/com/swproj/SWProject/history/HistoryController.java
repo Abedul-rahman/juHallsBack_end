@@ -17,7 +17,7 @@ public class HistoryController {
     private final HistoryServiceImpl historyService;
 
     @GetMapping("/GetHistory")
-    public List<GetReservationsResDTO> getHistory(@RequestParam Long userId) {
-        return historyService.getHistory(userId);
+    public List<GetReservationsResDTO> getHistory(@RequestParam String username) {
+        return historyService.getHistory(username);
     }
 }
