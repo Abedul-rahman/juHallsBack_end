@@ -17,7 +17,6 @@ public class CollegeEntityToGetAllResMapper implements Function<CollegeEntity, G
                 .builder()
                 .id(collegeEntity.getId())
                 .collegeName(collegeEntity.getName())
-
                 .build();
     }
 }
