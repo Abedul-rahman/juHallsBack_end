@@ -34,8 +34,8 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public List<GetFloorResDTO> getFloors() {
-        return floorRepo.findAll().stream().map(floorEntityToGetAllFloorMapper).toList();
+    public List<GetFloorResDTO> getFloors(Long collegeId) {
+        return floorRepo.findByCollegeId(collegeId).stream().map(floorEntityToGetAllFloorMapper).toList();
     }
 
     @Override

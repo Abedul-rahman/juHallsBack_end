@@ -4,6 +4,7 @@ import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.floor.GetFloorResDTO;
 import com.swproj.SWProject.roommangement.dto.res.room.GetRoomResDTO;
 import com.swproj.SWProject.roommangement.entity.FloorEntity;
+import com.swproj.SWProject.roommangement.repo.FloorRepo;
 import com.swproj.SWProject.roommangement.repo.RoomRepo;
 import com.swproj.SWProject.roommangement.service.impl.mapper.room.RoomEntityToGetAllResMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,11 @@ import java.util.function.Function;
 @Service
 @RequiredArgsConstructor
 public class FloorEntityToGetAllFloorMapper implements Function<FloorEntity, GetFloorResDTO> {
+    private final FloorRepo floorRepo;
 
     @Override
     public GetFloorResDTO apply(FloorEntity floorEntity) {
+
         return GetFloorResDTO.builder()
                 .floorId(floorEntity.getId())
                 .floorName(floorEntity.getFloorName())

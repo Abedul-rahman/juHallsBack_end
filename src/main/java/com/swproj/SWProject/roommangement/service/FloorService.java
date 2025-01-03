@@ -10,7 +10,7 @@ import java.util.List;
 public interface FloorService {
     void createFloor(CreateFloorReqDTO createFloorReqDTO);
 
-    List<GetFloorResDTO> getFloors();
+    List<GetFloorResDTO> getFloors(Long collegeId);
 
     void removeFloor(long id);
 

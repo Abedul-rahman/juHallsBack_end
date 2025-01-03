@@ -33,8 +33,8 @@ public class FloorController {
     }
 
     @GetMapping("/getAllFloor")
-    public ResponseEntity<List<GetFloorResDTO>> getFloors() {
-        return ResponseEntity.ok(floorService.getFloors());
+    public ResponseEntity<List<GetFloorResDTO>> getFloors(@RequestParam Long collegeId) {
+        return ResponseEntity.ok(floorService.getFloors(collegeId));
     }
 
     @GetMapping("/getFloorById")
