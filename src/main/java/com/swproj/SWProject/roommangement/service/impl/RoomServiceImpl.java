@@ -25,9 +25,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<GetRoomResDTO> getRooms() {
-        System.out.println("Logging change");
-        return roomRepo.findAll().stream().map(roomEntityToGetAllResMapper).toList();
+    public List<GetRoomResDTO> getRooms(Long floorId) {
+        return roomRepo.findByFloorId(floorId).stream().map(roomEntityToGetAllResMapper).toList();
     }
 
     @Override

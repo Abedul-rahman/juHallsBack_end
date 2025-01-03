@@ -32,8 +32,8 @@ public class RoomController {
     }
 
    @GetMapping("/getRooms")
-    public ResponseEntity<List<GetRoomResDTO>> getRooms() {
-        return ResponseEntity.ok().body(roomService.getRooms());
+    public ResponseEntity<List<GetRoomResDTO>> getRooms(@RequestParam Long floorId) {
+        return ResponseEntity.ok().body(roomService.getRooms(floorId));
     }
 
     @GetMapping("/getRoomById")

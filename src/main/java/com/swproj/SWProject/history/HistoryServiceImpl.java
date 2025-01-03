@@ -28,7 +28,7 @@ public class HistoryServiceImpl {
 
         return reservations.stream().map(reservationEntityToGetReservationsMapper).toList();
     }
-    public void cancelReservation(Long reservationId, String username) {
+    public void cancelReservation(Long reservationId) {
         ReserveEntity reservation = reserveRepo.findById(reservationId)
                 .orElseThrow(() -> new IllegalArgumentException("Reservation not found"));
 
@@ -39,8 +39,9 @@ public class HistoryServiceImpl {
         reservation.setStatus(Status.Canceled);
 
         reserveRepo.save(reservation);
-
-        Users reservationUser = userRepo.findByUsername(username);
+        Integer userId = (int) (long) reservation.getUserId();
+        Users reservationUser = userRepo.findById(userId).orElseThrow(()
+                -> new IllegalArgumentException("User not found"));
         if (reservationUser == null) {
             throw new IllegalArgumentException("User not found");
         }

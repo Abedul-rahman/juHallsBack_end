@@ -8,11 +8,14 @@ import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeByIdResDTO;
 import com.swproj.SWProject.roommangement.dto.res.college.GetCollegeResDTO;
 import com.swproj.SWProject.roommangement.entity.CollegeEntity;
 import com.swproj.SWProject.roommangement.entity.FloorEntity;
+import com.swproj.SWProject.roommangement.entity.RoomEntity;
 import com.swproj.SWProject.roommangement.repo.CollegeRepo;
 import com.swproj.SWProject.roommangement.repo.FloorRepo;
+import com.swproj.SWProject.roommangement.repo.RoomRepo;
 import com.swproj.SWProject.roommangement.service.CollegeService;
 import com.swproj.SWProject.roommangement.service.impl.mapper.college.CollegeEntityToGetAllResMapper;
 import com.swproj.SWProject.roommangement.service.impl.mapper.college.CollegeEntityToGetByIdResMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,7 @@ public class CollegeServiceImpl implements CollegeService {
     private final CollegeEntityToGetByIdResMapper collegeEntityToGetByIdResMapper;
     private final UserRepo userRepo;
     private final FloorRepo floorRepo;
+    private final RoomRepo roomRepo;
 
     @Override
     public void createCollege(CreateCollegeReqDTO createCollegeReqDTO) {
@@ -37,7 +41,27 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public void removeCollege(long id) {
-        collegeRepo.deleteById(id);
+        var collegeOpt = collegeRepo.findById(id);
+        if (collegeOpt.isPresent()) {
+            List<Long> floorsId = collegeOpt.get().getFloors().stream()
+                    .map(FloorEntity::getId)
+                    .toList();
+            for (Long floorId : floorsId) {
+                var floorOpt = floorRepo.findById(floorId);
+                if (floorOpt.isPresent()) {
+                    List<Long> roomsId = floorOpt.get().getRooms().stream()
+                            .map(RoomEntity::getId)
+                            .toList();
+                    for (Long roomId : roomsId) {
+                        roomRepo.deleteById(roomId);
+                    }
+                    floorRepo.deleteById(floorId);
+                }
+            }
+            collegeRepo.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("College with ID " + id + " not found");
+        }
     }
 
     @Override
