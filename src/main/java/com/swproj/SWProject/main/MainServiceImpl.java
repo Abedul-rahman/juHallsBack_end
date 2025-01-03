@@ -3,6 +3,7 @@ package com.swproj.SWProject.main;
 import com.swproj.SWProject.config.entity.UserPrincipal;
 import com.swproj.SWProject.config.entity.Users;
 import com.swproj.SWProject.config.repo.UserRepo;
+import com.swproj.SWProject.projenums.Periodically;
 import com.swproj.SWProject.reserve.dto.GetReservationsResDTO;
 import com.swproj.SWProject.reserve.repo.ReserveRepo;
 import com.swproj.SWProject.reserve.service.impl.mapper.ReservationEntityToGetReservationsMapper;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,13 +21,20 @@ public class MainServiceImpl {
     private final ReserveRepo reserveRepo;
     private final ReservationEntityToGetReservationsMapper reservationEntityToGetReservationsMapper;
     private final UserRepo userRepo;
+    LocalDateTime now = LocalDateTime.now();
+    int currentDay = now.getDayOfWeek().getValue() % 7;
+    String currentTime = now.toLocalTime().toString();
     public List<GetReservationsResDTO> getMainReservations() {
 
-        if (getCurrentUserRole().toString().equalsIgnoreCase("doctor") || getCurrentUserRole().toString().equalsIgnoreCase("student")) {
+        if (getCurrentUserRole().toString().equalsIgnoreCase("doctor")
+                || getCurrentUserRole().toString().equalsIgnoreCase("student")) {
             Users user= getCurrentUser();
             return reserveRepo.findLast4ByUserId(user.getId()).stream().map(reservationEntityToGetReservationsMapper).toList();
         }
         return reserveRepo.findLast4().stream().map(reservationEntityToGetReservationsMapper).toList();
+    }
+    public List<GetReservationsResDTO> getCurrentEvents(){
+        return reserveRepo.findLast4CurrentEvents(Periodically.None.ordinal(),currentDay,currentTime).stream().map(reservationEntityToGetReservationsMapper).toList();
     }
     private String getCurrentUserRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

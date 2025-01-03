@@ -61,4 +61,19 @@ public interface ReserveRepo extends JpaRepository<ReserveEntity, Long> {
 
     @Query(value = "SELECT * FROM reserve_entity ORDER BY id DESC LIMIT 4", nativeQuery = true)
     List<ReserveEntity> findLast4();
+
+    @Query(value = """
+    SELECT * 
+    FROM reserve_entity 
+    WHERE (periodically = :none OR periodically = :currentDay) 
+      AND start_time <= :currentTime 
+      AND end_time >= :currentTime 
+    ORDER BY id DESC 
+    LIMIT 4
+""", nativeQuery = true)
+    List<ReserveEntity> findLast4CurrentEvents(
+            @Param("none") int none,
+            @Param("currentDay") int currentDay,
+            @Param("currentTime") String currentTime
+    );
 }

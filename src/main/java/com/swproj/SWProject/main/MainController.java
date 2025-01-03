@@ -16,10 +16,13 @@ public class MainController {
     private final MainServiceImpl mainService;
 
 
-    //TODO:SHOW CURRENT  EVENTS (max 4)
-    //todo allow user to cancel res
     @GetMapping("/getMainReservations")
     public List<GetReservationsResDTO> getMain(){
         return mainService.getMainReservations();
+    }
+
+    @GetMapping("/getCurrentEvents")
+    public List<GetReservationsResDTO> getCurrentEvents(){
+        return mainService.getCurrentEvents();
     }
 }
